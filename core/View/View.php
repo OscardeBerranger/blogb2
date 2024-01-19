@@ -20,4 +20,12 @@ class View
         echo ob_get_clean();
 
     }
+    public static function renderError($nomDeTemplate){
+
+
+        ob_start();
+        require_once "../templates/error/$nomDeTemplate.html.php";
+        echo ob_get_clean();
+
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace Core\Kernel;
 
+use Core\Debugging\Debugger;
 use Core\Environment\DotEnv;
 use Core\Session\Session;
 
@@ -10,12 +11,12 @@ class Kernel
 
     public static function run()
     {
-        $dotEnv = new DotEnv();
-        $environment = $dotEnv->getVariable("ENVIRONMENT");
 
-        if($environment === "dev"){
-            \Core\Debugging\Debugger::run();
-        }
+            $debugger = new Debugger();
+            $debugger->run();
+
+
+
 
         Session::start();
 

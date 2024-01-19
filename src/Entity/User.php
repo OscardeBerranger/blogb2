@@ -14,6 +14,12 @@ class User extends UserAuthentication
     protected int $id;
     protected string $username;
     protected string $password;
+    private string $roles = "";
+
+    public function getRoles()
+    {
+
+    }
 
     /**
      * @return int

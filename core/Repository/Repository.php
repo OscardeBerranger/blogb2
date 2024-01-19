@@ -35,6 +35,7 @@ abstract class Repository
         $reflection = new \ReflectionClass($this->targetEntity);
         $attributes = $reflection->getAttributes(Table::class);
         $arguments = $attributes[0]->getArguments();
+
         $tableName = $arguments['name'];
         return $tableName;
     }
