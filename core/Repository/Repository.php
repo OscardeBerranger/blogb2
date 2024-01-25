@@ -11,6 +11,8 @@ abstract class Repository
 
     protected \PDO $pdo;
 
+    protected bool $autoCommit = false;
+
     protected string $targetEntity;
 
     protected string $tableName;
@@ -22,6 +24,30 @@ abstract class Repository
         $this->tableName = $this->resolveTableName();
     }
 
+    protected function beginTransaction(){
+
+        if(!$this->autoCommit){
+
+            $this->pdo->beginTransaction();
+            $this->autoCommit = True;
+            return true;
+        }
+        return false;
+
+    }
+
+    protected function flush()
+    {
+        try{
+            $this->pdo->commit();
+            $this->autoCommit = false;
+        }catch (\Exception $e)
+        {
+            throw new \Exception($e);
+        }
+
+
+    }
 
     protected function resolveTargetEntity(){
         $reflection = new \ReflectionClass($this);

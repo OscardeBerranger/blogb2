@@ -5,6 +5,7 @@ use Core\Environment\DotEnv;
 class PDOMySQL
 {
 
+    public static $currentPdo = null;
 
    public static function getPdo(){
 
@@ -18,8 +19,12 @@ class PDOMySQL
         $password = $dotEnv->getVariable("PASSWORD");
 
 
+        if(self::$currentPdo == null){
 
-        $pdo = new \PDO(
+
+
+
+        self::$currentPdo = new \PDO(
             "mysql:host=$dbHost;dbname=$dbName",
             $username,
             $password,
@@ -28,7 +33,9 @@ class PDOMySQL
                 \PDO::ATTR_DEFAULT_FETCH_MODE=>\PDO::FETCH_ASSOC
             ]
         );
-        return $pdo;
+
+        }
+        return self::$currentPdo;
     }
 
 
