@@ -8,6 +8,7 @@ use Core\Session\Flash;
 use Core\Session\Session;
 use Core\View\View;
 
+#[Wireable]
 abstract class Controller
 {
     private Response $response;

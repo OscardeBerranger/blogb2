@@ -16,8 +16,10 @@ align-items: center;
         <span>Auth :</span>
         <span>
             <?php
+
             if(\Core\Session\Session::userConnected()){
-                echo \Core\Session\Session::user()['id']." : ".\Core\Session\Session::user()['username'];
+
+                echo \Core\Session\Session::user()['id']." : ".\Core\Session\Session::user()['authenticator'];
             }else{
                 echo "Anonymous";
             }
@@ -26,7 +28,7 @@ align-items: center;
     </span>
 
     <span>
-        <a href="http://localhost:4372"><strong>Profiler</strong></a>
+        <a href="http://localhost:4372" target="_blank"><strong>Profiler</strong></a>
     </span>
 
 </div>

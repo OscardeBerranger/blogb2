@@ -2,8 +2,10 @@
 
 namespace Core\Kernel;
 
+use App\Repository\ArticleRepository;
 use Core\Debugging\Debugger;
 use Core\Environment\DotEnv;
+use Core\ServiceContainer\ServiceContainer;
 use Core\Session\Session;
 
 class Kernel
@@ -11,6 +13,7 @@ class Kernel
 
     public static function run()
     {
+           Session::start();
 
             $debugger = new Debugger();
             $debugger->run();
@@ -18,7 +21,6 @@ class Kernel
 
 
 
-        Session::start();
 
     $type = "home";
     $action = "index";
@@ -33,8 +35,16 @@ class Kernel
 
     $controller = new $controllerName();
 
-    $controller->$action();
+    $serviceContainer = new ServiceContainer();
+    $dependencies = $serviceContainer->resolveMethod($controller, $action);
 
+    //$arguments = $dependencies
+
+        $id = "coucou";
+        $arguments = array_merge($dependencies, [$id]);
+
+   // $controller->$action($dependencies);
+    call_user_func_array([$controller, $action], $arguments);
 
 
     }

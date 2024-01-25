@@ -37,4 +37,7 @@ class ArticleRepository extends \Core\Repository\Repository
         return $this->find($article->getId());
 
     }
+
+
+
 }
