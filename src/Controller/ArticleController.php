@@ -178,8 +178,6 @@ class ArticleController extends \Core\Controller\Controller
         $articleRepository->delete($article);
 
         return  $this->redirect("?type=article&action=index");
-
     }
-
 
 }

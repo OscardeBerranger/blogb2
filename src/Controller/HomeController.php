@@ -13,22 +13,11 @@ class HomeController extends \Core\Controller\Controller
 {
 
     #[Route("/truc/{id}")]
-    public function index(PDOMySQL $service ):Response
+    public function index()
     {
 
-
-    echo $service->coucou();
-
-
-
-
-      // var_dump($id) ;
-      // var_dump($repo);
-
-
-        return $this->render("home/index", [
-            "pageTitle"=> "Welcome to the framework"
-        ]);
+        $test = "ceci sera sérializé";
+        return $this->json($test);
     }
 
 
