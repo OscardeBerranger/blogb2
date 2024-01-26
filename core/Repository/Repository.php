@@ -45,8 +45,6 @@ abstract class Repository
         {
             throw new \Exception($e);
         }
-
-
     }
 
     protected function resolveTargetEntity(){
@@ -92,6 +90,37 @@ abstract class Repository
 
         return $item;
     }
+    public function save($object):void{
+        //if autocommit
+        $reflection = new \ReflectionClass(get_class($object));
+        if (!$reflection->getNamespaceName() == "App\Entity"){
+            throw new \Exception("Entity not found");
+        }
+        $props = $reflection->getProperties();
+        $sql = "INSERT INTO $this->tableName SET ";
+        $toBeUsed = [];
+        foreach ($props as $prop){
+            foreach ($prop->getAttributes() as $attribute) {
+                if ($attribute->getName() == "App\Entity\Column"){
+                    $toBeUsed[]=$prop;
+                }
+            }
+        }
+        foreach ($toBeUsed as $item){
+            $index = $item->getName();
+            $sql.="$index = :$index ,";
+            $getter = "get".ucfirst($index);
+            $tabeauExecutable[$index] = $object->$getter();
+        }
+
+        $this->beginTransaction();
+        $sql = substr_replace($sql, ";", -1);
+
+        // A changer
+        $query = $this->pdo->prepare($sql);
+        $query->execute($tabeauExecutable);
+    }
+
 
     public function delete(object $object):void
     {
