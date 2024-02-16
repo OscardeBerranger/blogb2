@@ -22,6 +22,4 @@ class HomeController extends \Core\Controller\Controller
 
 
 
-
-
 }

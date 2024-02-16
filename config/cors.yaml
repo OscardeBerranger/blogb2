@@ -1,5 +1,13 @@
-default:
-  allow_origin: [ '*' ]
-  allow_methods: [ 'GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE' ]
-  allow_headers: [ 'Content-Type', 'Authorization' ]
+headers:
+  Allow-Origin: [ '*' ]
+  Allow-Methods: [ 'GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE' ]
+  Content-Type: [ 'application/json' ]
+  Accept-Charset: ["charset=utf-8"]
   expose_headers: [ 'Link' ]
+  Max-Age: 3600
+
+
+#
+#    header('Access-Control-Allow-Headers: *');
+#    header('Content-Type: application/json; charset=utf-8');
+#    header('Access-Control-Allow-Methods: *');

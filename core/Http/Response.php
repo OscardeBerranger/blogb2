@@ -36,12 +36,12 @@ class Response
 
     public function setHeaders(): void
     {
-
-//        var_dump(\yaml_parse_file("/home/ravioli/Documents/homemade-framework/config/cors.yaml"));
-        header('Access-Control-Allow-Origin: *');
-        header('Access-Control-Allow-Headers: *');
-        header('Content-Type: application/json; charset=utf-8');
-        header('Access-Control-Allow-Methods: *');
+        $yaml = \yaml_parse_file("../config/cors.yaml")["headers"];
+        header('Access-Control-Allow-Origin: '.implode(", ", $yaml["Allow-Origin"]));
+        header('Access-Control-Allow-Methods: '.implode(", ", $yaml["Allow-Methods"]));
+        header("Content-Type".implode(", ", $yaml["Content-Type"]));
+        header("Accept-Charset".implode(", ", $yaml["Accept-Charset"]));
+        header("Access-Control-Max-Age".$yaml["Max-Age"]);
     }
     protected function setHttpResponseCode($code): void
     {
@@ -55,4 +55,5 @@ class Response
         echo Serializer::serialize($toSerialize);
         return $this;
     }
+
 }
