@@ -13,10 +13,10 @@ class Kernel
 
     public static function run()
     {
-           Session::start();
+    Session::start();
 
-            $debugger = new Debugger();
-            $debugger->run();
+    $debugger = new Debugger();
+    $debugger->run();
 
 
 

@@ -79,7 +79,7 @@ class Debugger
     }
 
     public function getProfilerBar(){
-        if ($this->profileBarStatus) {
+        if (Debugger::$profileBarStatus) {
             ob_start();
             require_once "templates/profilerbar.html.php";
             echo ob_get_clean();

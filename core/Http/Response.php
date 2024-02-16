@@ -37,11 +37,11 @@ class Response
     public function setHeaders(): void
     {
 
-        \yaml_parse_file("/home/ravioli/Documents/homemade-framework/config/cors.yaml");
-//        header('Access-Control-Allow-Origin: *');
-//        header('Access-Control-Allow-Headers: *');
-//        header('Content-Type: application/json; charset=utf-8');
-//        header('Access-Control-Allow-Methods: *');
+//        var_dump(\yaml_parse_file("/home/ravioli/Documents/homemade-framework/config/cors.yaml"));
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Headers: *');
+        header('Content-Type: application/json; charset=utf-8');
+        header('Access-Control-Allow-Methods: *');
     }
     protected function setHttpResponseCode($code): void
     {
