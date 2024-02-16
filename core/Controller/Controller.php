@@ -3,8 +3,9 @@
 namespace Core\Controller;
 
 use App\Repository\UserRepository;
+use Core\Http\JsonResponse;
 use Core\Http\Response;
-use Core\Http\Serializer;
+use Core\Serializer\Serializer;
 use Core\Session\Flash;
 use Core\Session\Session;
 use Core\View\View;
@@ -13,12 +14,10 @@ use Core\View\View;
 abstract class Controller
 {
     private Response $response;
-    private Serializer $serializer;
 
     public function __construct()
     {
         $this->response = new Response();
-        $this->serializer = new Serializer();
     }
 
     public function redirect(string $route = null)
@@ -31,7 +30,7 @@ abstract class Controller
         return $this->response->render($nomDeTemplate, $donnees);
     }
     public function json($toSerialize){
-        return $this->serializer->serialize($toSerialize);
+        return $this->response->json($toSerialize);
     }
 
     public function addFlash(string $message, string $color = "primary")

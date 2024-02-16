@@ -12,13 +12,14 @@ use Core\Http\Response;
 class HomeController extends \Core\Controller\Controller
 {
 
-    #[Route("/truc/{id}")]
-    public function index()
-    {
+    #[Route("/test")]
+    public function test(){
 
-        $test = "ceci sera sérializé";
-        return $this->json($test);
+        // echo json_encode("coucou"); die();
+
+        return $this->json(["truc"=>"test", "truc2"=>123]);
     }
+
 
 
 

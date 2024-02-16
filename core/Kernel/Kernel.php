@@ -40,13 +40,13 @@ class Kernel
 
     //$arguments = $dependencies
 
-        $id = "coucou";
-        $arguments = array_merge($dependencies, [$id]);
+    $id = "coucou";
+    $arguments = array_merge($dependencies, [$id]);
 
    // $controller->$action($dependencies);
     call_user_func_array([$controller, $action], $arguments);
 
-
+    $debugger->getProfilerBar();
     }
 
 }

@@ -12,6 +12,8 @@ class Debugger
 
     private $exception;
 
+    public static bool $profileBarStatus = true;
+
     public function  errorHandler($severity, $message, $file, $line)
 
     {
@@ -50,9 +52,6 @@ class Debugger
 
         set_error_handler([$this, "errorHandler"]);
         set_exception_handler([$this, "exceptionHandler"]);
-
-        $this->getProfilerBar();
-
     }
 
     public function renderDebugger($template, $data)
@@ -80,9 +79,11 @@ class Debugger
     }
 
     public function getProfilerBar(){
-        ob_start();
-        require_once "templates/profilerbar.html.php";
-        echo ob_get_clean();
+        if ($this->profileBarStatus) {
+            ob_start();
+            require_once "templates/profilerbar.html.php";
+            echo ob_get_clean();
+        }
     }
 
     private function runProd()
